@@ -27,7 +27,7 @@ https://luminarylabs-agents.github.io/NexusEngine-TreeFactory/
 
 ```txt
 NexusEngine
-d86188c66692d9c24815aa2b29612c70df8fde4e
+c5548de504072bf09eb68986b98aca0292903803
 
 NexusEngine-Kits
 9673594de5669b4691737b91a9d56fa282e74370
@@ -35,6 +35,8 @@ NexusEngine-Kits
 NexusEngine-ProtoKits
 956fe5431d573079a5f3a46597f89055676f3eab
 ```
+
+The browser gateway uses only the pinned jsDelivr and Fastly jsDelivr endpoints. If its recursive module-graph probe finds a deterministic 404, it stops rather than retrying equivalent mirrors or falling through to `main`.
 
 ## Architecture
 
