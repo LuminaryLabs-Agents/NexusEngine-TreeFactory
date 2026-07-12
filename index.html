@@ -10,10 +10,10 @@
   <script type="importmap">
     {
       "imports": {
-        "nexusengine": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine@d86188c66692d9c24815aa2b29612c70df8fde4e/src/index.js",
-        "@luminarylabs/nexusengine-kits/seed-kit": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine-Kits@9673594de5669b4691737b91a9d56fa282e74370/kits/foundation/seed-kit/index.js",
-        "@luminarylabs/nexusengine-kits/procedural-objects": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine-Kits@9673594de5669b4691737b91a9d56fa282e74370/domains/procedural-objects/index.js",
-        "@luminarylabs/nexusengine-protokits/procedural-tree-kits": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusEngine-ProtoKits@956fe5431d573079a5f3a46597f89055676f3eab/protokits/procedural-tree-kits/index.js",
+        "nexusengine": "./src/vendor/nexusengine.js",
+        "@luminarylabs/nexusengine-kits/seed-kit": "./src/vendor/nexus-kits.js",
+        "@luminarylabs/nexusengine-kits/procedural-objects": "./src/vendor/nexus-kits.js",
+        "@luminarylabs/nexusengine-protokits/procedural-tree-kits": "./src/vendor/nexus-kits.js",
         "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
         "three/addons/": "https://unpkg.com/three@0.184.0/examples/jsm/"
       }
@@ -125,6 +125,20 @@
     </div>
   </div>
 
+  <script>
+    window.addEventListener("error", (event) => {
+      const targetUrl = event.target?.src || event.target?.href;
+      if (!targetUrl && event.error) return;
+      const fatal = document.querySelector("#fatal");
+      const message = document.querySelector("#fatal-message");
+      if (fatal && message) {
+        message.textContent = targetUrl
+          ? `A required module failed to load: ${targetUrl}`
+          : String(event.message || "A required module failed to load.");
+        fatal.hidden = false;
+      }
+    }, true);
+  </script>
   <script type="module" src="./src/app.js"></script>
 </body>
 </html>
