@@ -1,7 +1,7 @@
 import {
   githubCdnCandidates,
   importWithFallback
-} from "./nexusengine.js";
+} from "./cdn-import.js";
 
 const KITS_COMMIT = "9673594de5669b4691737b91a9d56fa282e74370";
 const TREE_COMMIT = "956fe5431d573079a5f3a46597f89055676f3eab";
