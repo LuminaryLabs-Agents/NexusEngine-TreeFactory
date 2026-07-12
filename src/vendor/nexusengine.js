@@ -1,39 +1,15 @@
-const CORE_COMMIT = "d86188c66692d9c24815aa2b29612c70df8fde4e";
+import {
+  githubCdnCandidates,
+  importWithFallback
+} from "./cdn-import.js";
 
-export async function importWithFallback(label, candidates) {
-  const failures = [];
+export {
+  findDeterministicModuleGraph404,
+  githubCdnCandidates,
+  importWithFallback
+} from "./cdn-import.js";
 
-  for (const candidate of candidates) {
-    try {
-      return await import(candidate);
-    } catch (error) {
-      failures.push({
-        url: candidate,
-        message: error instanceof Error ? error.message : String(error)
-      });
-    }
-  }
-
-  const summary = failures
-    .map((failure, index) => `${index + 1}. ${failure.url}\n   ${failure.message}`)
-    .join("\n");
-
-  throw new Error(
-    `Unable to load ${label} from every configured CDN source.\n${summary}`
-  );
-}
-
-export function githubCdnCandidates({ owner, repository, commit, path }) {
-  const normalizedPath = String(path).replace(/^\/+/, "");
-  return [
-    `https://cdn.jsdelivr.net/gh/${owner}/${repository}@${commit}/${normalizedPath}`,
-    `https://fastly.jsdelivr.net/gh/${owner}/${repository}@${commit}/${normalizedPath}`,
-    `https://cdn.statically.io/gh/${owner}/${repository}/${commit}/${normalizedPath}`,
-    `https://cdn.jsdelivr.net/gh/${owner}/${repository}@main/${normalizedPath}`,
-    `https://fastly.jsdelivr.net/gh/${owner}/${repository}@main/${normalizedPath}`,
-    `https://cdn.statically.io/gh/${owner}/${repository}/main/${normalizedPath}`
-  ];
-}
+const CORE_COMMIT = "c5548de504072bf09eb68986b98aca0292903803";
 
 const runtime = await importWithFallback(
   "NexusEngine",
