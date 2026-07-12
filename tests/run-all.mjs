@@ -3,7 +3,8 @@ import { spawnSync } from "node:child_process";
 const tests = [
   "tests/species-presets.test.mjs",
   "tests/tree-factory-state.test.mjs",
-  "tests/capture-plan.test.mjs"
+  "tests/capture-plan.test.mjs",
+  "tests/cdn-import.test.mjs"
 ];
 
 for (const test of tests) {
