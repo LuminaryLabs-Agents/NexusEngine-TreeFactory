@@ -1,0 +1,376 @@
+* { box-sizing: border-box; }
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #0a1013;
+  color: #eef4ef;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button, select, input[type="number"], input[type="color"] {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,.07);
+  color: inherit;
+}
+
+button {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(255,255,255,.12);
+}
+
+button.primary {
+  border-color: rgba(139,210,125,.45);
+  background: rgba(139,210,125,.2);
+}
+
+button.small {
+  padding: 5px 8px;
+  font-size: 11px;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 308px minmax(0, 1fr) 330px;
+  grid-template-rows: 52px minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.topbar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  background: #0d1519;
+}
+
+.subtitle {
+  margin-left: 10px;
+  color: #889a91;
+  font-size: 12px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel {
+  overflow: auto;
+  background: #111a1f;
+  scrollbar-color: #36464d transparent;
+}
+
+.left-panel {
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+
+.right-panel {
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+
+.panel section {
+  padding: 13px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-heading span {
+  color: #84958d;
+  font-size: 10px;
+}
+
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+
+.species-card {
+  min-height: 72px;
+  padding: 9px;
+  text-align: left;
+}
+
+.species-card.active {
+  outline: 1px solid #8bd27d;
+  background: rgba(139,210,125,.14);
+}
+
+.species-card strong,
+.species-card span {
+  display: block;
+}
+
+.species-card span {
+  margin-top: 4px;
+  color: #83948c;
+  font-size: 9px;
+}
+
+.control-group {
+  margin-top: 13px;
+}
+
+.control-group h3 {
+  margin: 0 0 8px;
+  color: #9aaba2;
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 1fr 88px;
+  align-items: center;
+  gap: 9px;
+  margin: 7px 0;
+}
+
+.control-row label {
+  color: #b6c2bc;
+  font-size: 11px;
+}
+
+.control-row output {
+  color: #8bd27d;
+  font-size: 10px;
+  text-align: right;
+}
+
+.control-row input,
+.control-row select {
+  width: 100%;
+}
+
+.control-row input[type="range"] {
+  grid-column: 1 / -1;
+  accent-color: #8bd27d;
+}
+
+.control-row input[type="color"] {
+  height: 30px;
+  padding: 2px;
+}
+
+.viewport-shell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: #dbe9ee;
+}
+
+#viewport {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.viewport-toolbar,
+.viewport-status {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  background: rgba(10,17,22,.82);
+  backdrop-filter: blur(10px);
+}
+
+.viewport-toolbar {
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  font-size: 10px;
+}
+
+.viewport-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.viewport-status {
+  left: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  padding: 7px 10px;
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #b3c0b9;
+  font-size: 10px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px 10px;
+  margin: 0;
+  font-size: 10px;
+}
+
+.stats-grid dt {
+  color: #87988f;
+}
+
+.stats-grid dd {
+  margin: 0;
+  color: #eaf3eb;
+  text-align: right;
+}
+
+#atlas-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+  background:
+    linear-gradient(45deg, #273137 25%, transparent 25%),
+    linear-gradient(-45deg, #273137 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #273137 75%),
+    linear-gradient(-45deg, transparent 75%, #273137 75%);
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+}
+
+.capture-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+  margin-top: 7px;
+}
+
+.capture-cell {
+  padding: 4px 2px;
+  border-radius: 5px;
+  background: rgba(255,255,255,.05);
+  color: #889b91;
+  font-size: 8px;
+  text-align: center;
+}
+
+.capture-cell.active {
+  background: rgba(139,210,125,.2);
+  color: white;
+}
+
+pre {
+  max-height: 220px;
+  margin: 0;
+  overflow: auto;
+  color: #a9c4b0;
+  font: 9px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.export-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.file-button {
+  display: block;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px dashed rgba(255,255,255,.18);
+  border-radius: 8px;
+  color: #9aaba2;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-button input {
+  display: none;
+}
+
+#fatal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  place-items: center;
+  padding: 24px;
+  background: #182129;
+}
+
+#fatal:not([hidden]) {
+  display: grid;
+}
+
+#fatal > div {
+  max-width: 560px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 14px;
+  background: rgba(0,0,0,.25);
+}
+
+@media (max-width: 1100px) {
+  #app {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  .right-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  #app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 52px minmax(0, 1fr);
+  }
+
+  .left-panel,
+  .right-panel {
+    display: none;
+  }
+
+  .subtitle,
+  .compact-toggle {
+    display: none;
+  }
+}

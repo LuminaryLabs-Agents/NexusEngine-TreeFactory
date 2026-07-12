@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0d1519">
+  <title>NexusEngine TreeFactory</title>
+  <link rel="stylesheet" href="./styles.css">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "nexusengine": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine@d86188c66692d9c24815aa2b29612c70df8fde4e/src/index.js",
+        "@luminarylabs/nexusengine-kits/seed-kit": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine-Kits@9673594de5669b4691737b91a9d56fa282e74370/kits/foundation/seed-kit/index.js",
+        "@luminarylabs/nexusengine-kits/procedural-objects": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Dev/NexusEngine-Kits@9673594de5669b4691737b91a9d56fa282e74370/domains/procedural-objects/index.js",
+        "@luminarylabs/nexusengine-protokits/procedural-tree-kits": "https://cdn.jsdelivr.net/gh/LuminaryLabs-Agents/NexusEngine-ProtoKits@956fe5431d573079a5f3a46597f89055676f3eab/protokits/procedural-tree-kits/index.js",
+        "three": "https://unpkg.com/three@0.184.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.184.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div>
+        <strong>NexusEngine TreeFactory</strong>
+        <span class="subtitle">Procedural tree laboratory</span>
+      </div>
+      <div class="top-actions">
+        <label class="compact-toggle">
+          <input id="auto-build" type="checkbox" checked>
+          Live rebuild
+        </label>
+        <button id="randomize-seed">Randomize</button>
+        <button id="generate-tree" class="primary">Generate</button>
+      </div>
+    </header>
+
+    <aside class="left-panel panel">
+      <section>
+        <div class="section-heading">
+          <h2>Species</h2>
+          <span id="species-count"></span>
+        </div>
+        <div id="species-grid" class="species-grid"></div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Tree controls</h2>
+          <button id="reset-species" class="small">Reset</button>
+        </div>
+        <div id="control-groups"></div>
+      </section>
+    </aside>
+
+    <main class="viewport-shell">
+      <canvas id="viewport"></canvas>
+
+      <div class="viewport-toolbar">
+        <label>
+          LOD
+          <select id="lod-mode">
+            <option value="0" selected>LOD0</option>
+            <option value="1">LOD1</option>
+            <option value="2">LOD2</option>
+            <option value="3">Impostor</option>
+            <option value="auto">Automatic</option>
+          </select>
+        </label>
+        <label class="compact-toggle">
+          <input id="show-bounds" type="checkbox">
+          Bounds
+        </label>
+        <label class="compact-toggle">
+          <input id="rotate-tree" type="checkbox">
+          Turntable
+        </label>
+      </div>
+
+      <div id="viewport-status" class="viewport-status">Starting…</div>
+    </main>
+
+    <aside class="right-panel panel">
+      <section>
+        <h2>Build</h2>
+        <dl id="build-stats" class="stats-grid"></dl>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Capture atlas</h2>
+          <span id="capture-status"></span>
+        </div>
+        <canvas id="atlas-preview" width="512" height="512"></canvas>
+        <div id="capture-grid" class="capture-grid"></div>
+      </section>
+
+      <section>
+        <h2>Object contract</h2>
+        <pre id="object-preview"></pre>
+      </section>
+
+      <section>
+        <h2>Exports</h2>
+        <div class="export-grid">
+          <button id="export-object">Object JSON</button>
+          <button id="export-preset">Preset JSON</button>
+          <button id="export-glb">LOD0 GLB</button>
+          <button id="export-atlas">Atlas PNG</button>
+        </div>
+        <label class="file-button">
+          Import preset
+          <input id="import-preset" type="file" accept="application/json,.json">
+        </label>
+      </section>
+    </aside>
+  </div>
+
+  <div id="fatal" hidden>
+    <div>
+      <strong>TreeFactory could not start.</strong>
+      <p id="fatal-message"></p>
+    </div>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
