@@ -33,7 +33,8 @@ for (const required of [
   "dist/index.html",
   "dist/styles.css",
   "dist/src/app.js",
-  "dist/src/domain/tree-factory-domain-kit.js"
+  "dist/src/domain/tree-factory-domain-kit.js",
+  "dist/src/domain/tree-object-contract-adapter.js"
 ]) {
   if (!fs.existsSync(path.join(root, required))) {
     throw new Error(`Missing build output: ${required}`);
