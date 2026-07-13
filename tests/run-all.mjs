@@ -4,6 +4,7 @@ const tests = [
   "tests/species-presets.test.mjs",
   "tests/tree-factory-state.test.mjs",
   "tests/capture-plan.test.mjs",
+  "tests/tree-object-contract-adapter.test.mjs",
   "tests/cdn-import.test.mjs"
 ];
 
