@@ -48,6 +48,13 @@ TreeFactory application domain
 ├── export ledger
 └── capture-plan diagnostics
 
+Tree object-contract compatibility adapter
+├── wraps the installed procedural-tree API
+├── preserves valid nexus-object-descriptor/1 data
+├── repairs missing or invalid descriptors through createTreeObjectDescriptor
+├── validates through NexusEngine Core Object
+└── keeps a bounded descriptor cache off the frame loop
+
 NexusEngine
 ├── realtime runtime
 ├── core-object-kit
@@ -69,6 +76,8 @@ NexusEngine-ProtoKits
     ├── tree-asset-snapshot-kit
     └── three-tree-render-adapter-kit
 ```
+
+The compatibility adapter exists because the pinned procedural-tree kit’s installed legacy API can omit the newer `objectDescriptor` decoration even though the module exports the official converter. TreeFactory does not recreate the object contract. It invokes the official converter and validates the result through NexusEngine before the existing Core Object registry receives it.
 
 ## Local use
 
